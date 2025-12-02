@@ -1,3 +1,12 @@
+This update is a small kludge due to what appears to be something in Python or 
+iPython that breaks this package - Pyhton appears to no longer like packages
+that start with a capital letter. Note the small syntax changes - everything
+needs to be geohash.gh.<function> instead of geohash.<function> . I could
+probably fix this to be a little nicer, but I really just need to get my 
+work done.
+
+Note also the changes on decode... use decode_exactly.
+
 =======
 Geohash
 =======
@@ -7,27 +16,27 @@ encoding Geohashes_ to and from latitude and longitude coordinates.
 
 Example::
 
-  >>> import Geohash
-  >>> print 'Geohash for 42.6, -5.6:', Geohash.encode(42.6, -5.6)
+  >>> import geohash
+  >>> print(f'Geohash for 42.6, -5.6: {geohash.gh.encode(42.6, -5.6)}')
   Geohash for 42.6, -5.6: ezs42e44yx96
 
 You can specify an arbitrary precision when encoding. The precision
 determines the number of characters in the Geohash::
 
-  >>> print 'Geohash for 42.6, -5.6:', Geohash.encode(42.6, -5.6, precision=5)
+  >>> print(f'Geohash for 42.6, -5.6: {geohash.gh.encode(42.6, -5.6, precision = 5)}')
   Geohash for 42.6, -5.6: ezs42
 
 Decoding a Geohash returns a (latitude, longitude) tuple::
 
-  >>> print 'Coordinate for Geohash ezs42:', Geohash.decode('ezs42')
-  Coordinate for Geohash ezs42: ('42.6', '-5.6')
+  >>> print(f"Coordinate for Geohash ezs42: {geohash.gh.decode('ezs42')}")
+  Coordinate for Geohash ezs42: ('(1, 42.60498046875)', '(1, -5.60302734375)')
 
 The Geohash module also provides exact decoding with error margin
 results. The decode_exactly function returns a tuple of four float
 values; latitude, longitude, latitude error margin, longitude error
 margin::
 
-  >>> print 'Exact coordinate for Geohash ezs42:\n', Geohash.decode_exactly('ezs42')
+  >>> print(f"Exact coordinate for Geohash ezs42:\n{geohash.gh.decode_exactly('ezs42')}")
   Exact coordinate for Geohash ezs42:
   (42.60498046875, -5.60302734375, 0.02197265625, 0.02197265625)
 
